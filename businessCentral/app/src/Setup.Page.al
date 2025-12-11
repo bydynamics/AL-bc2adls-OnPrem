@@ -52,15 +52,15 @@ page 82560 "ADLSE Setup"
 
                     field(Workspace; Rec.Workspace)
                     {
-                        Editable = not FabricOpenMirroring;
+                        Editable = not this.FabricOpenMirroring;
                     }
                     field(Lakehouse; Rec.Lakehouse)
                     {
-                        Editable = not FabricOpenMirroring;
+                        Editable = not this.FabricOpenMirroring;
                     }
                     field(LandingZone; Rec.LandingZone)
                     {
-                        Editable = FabricOpenMirroring;
+                        Editable = this.FabricOpenMirroring;
                     }
                 }
 
@@ -179,26 +179,7 @@ page 82560 "ADLSE Setup"
                             Rec.Translations := CopyStr(CopyStr(Rec.Translations, 1, StrLen(Rec.Translations) - 1), 1, 250);
                             CurrPage.Update();
                         end;
-                    }
-                    field("Export Enum as Integer"; Rec."Export Enum as Integer") { }
-                    field("Use Field Captions"; Rec."Use Field Captions")
-                    {
-                    }
-                    field("Use Table Captions"; Rec."Use Table Captions")
-                    {
-                    }
-                    field("Use IDs for Duplicates Only"; Rec."Use IDs for Duplicates Only")
-                    {
-                    }
-                    field("Delete Table"; Rec."Delete Table")
-                    {
-                        Editable = not FabricOpenMirroring;
-                    }
-                    field("Delivered DateTime"; Rec."Delivered DateTime") { }
-                    field("Export Company Database Tables"; Rec."Export Company Database Tables")
-                    {
-                        Lookup = true;
-                    }
+                    end;
                 }
             }
 
