@@ -1,5 +1,5 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
-table 82580 "Session Instruction"
+table 80038 "Session Instruction"
 {
     Caption = 'Session Instruction';
     DataClassification = CustomerContent;

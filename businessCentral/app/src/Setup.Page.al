@@ -19,6 +19,7 @@ page 82560 "ADLSE Setup"
 
                 field(StorageType; Rec."Storage Type")
                 {
+                    ToolTip = 'Specifies the type of storage type to use.';
                     trigger OnValidate()
                     begin
                         CurrPage.Update(true);
@@ -41,8 +42,14 @@ page 82560 "ADLSE Setup"
                     Caption = 'Azure Data Lake';
                     Visible = AzureDataLake;
 
-                    field(Container; Rec.Container) { }
-                    field(AccountName; Rec."Account Name") { }
+                    field(Container; Rec.Container)
+                    {
+                        ToolTip = 'Specifies the name of the container where the data is going to be uploaded. Please refer to constraints on container names at https://docs.microsoft.com/en-us/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata.';
+                    }
+                    field(AccountName; Rec."Account Name")
+                    {
+                        ToolTip = 'Specifies the name of the storage account.';
+                    }
                 }
 
                 group(MSFabricSettings)
@@ -52,15 +59,18 @@ page 82560 "ADLSE Setup"
 
                     field(Workspace; Rec.Workspace)
                     {
-                        Editable = not this.FabricOpenMirroring;
+                        Editable = not FabricOpenMirroring;
+                        ToolTip = 'Specifies the name of the Workspace where the data is going to be uploaded. This can be a name or a GUID.';
                     }
                     field(Lakehouse; Rec.Lakehouse)
                     {
-                        Editable = not this.FabricOpenMirroring;
+                        Editable = not FabricOpenMirroring;
+                        ToolTip = 'Specifies the name of the Lakehouse where the data is going to be uploaded. This can be a name or a GUID.';
                     }
                     field(LandingZone; Rec.LandingZone)
                     {
-                        Editable = this.FabricOpenMirroring;
+                        Editable = FabricOpenMirroring;
+                        ToolTip = 'Specifies the name of the Landing Zone where the data is going to be uploaded. This Landing Zone you can find at the Replication Status page in Microsoft Fabric.';
                     }
                 }
 
@@ -100,33 +110,40 @@ page 82560 "ADLSE Setup"
                 field(MaxPayloadSize; Rec.MaxPayloadSizeMiB)
                 {
                     Editable = AzureDataLake or FabricOpenMirroring;
+                    ToolTip = 'Specifies the maximum size of the upload for each block of data in MiBs. A large value will reduce the number of iterations to upload the data but may interfear with the performance of other processes running on this environment.';
                 }
                 field("Skip Timestamp Sorting On Recs"; Rec."Skip Timestamp Sorting On Recs")
                 {
                     Importance = Additional;
                     Enabled = not ExportInProgress;
+                    ToolTip = 'Specifies that the records are not sorted as per their row version before exporting them to the lake. Enabling this may interfear with how incremental data is pushed to the lake in subsequent export runs- please refer to the documentation.';
                 }
                 field("Delayed Export"; Rec."Delayed Export")
                 {
                     Importance = Additional;
                     Enabled = not ExportInProgress;
+                    ToolTip = 'Specifies the delayed export time in seconds (0 = No delay). Creates a delay before changes are moved from BC to the data lake/Fabric to avoid exporting changes in the middle of a transaction. Set this to a value that represents the longest expected transaction time in your environment (e.g., 30-60 seconds for typical operations, 120+ seconds for batch processes).';
                 }
                 field("Export Company Database Tables"; Rec."Export Company Database Tables")
                 {
                     Lookup = true;
+                    ToolTip = 'Specifies the company for the export of the database tables.';
                 }
                 field("Emit telemetry"; Rec."Emit telemetry")
                 {
                     Importance = Additional;
+                    ToolTip = 'Specifies if operational telemetry will be emitted to this extension publisher''s telemetry pipeline. You will have to configure a telemetry account for this extension first.';
                 }
                 field("Delete Table"; Rec."Delete Table")
                 {
                     Importance = Additional;
-                    Editable = not this.FabricOpenMirroring;
+                    Editable = not FabricOpenMirroring;
+                    ToolTip = 'Specifies if the table will be deleted if a reset of the table is done.';
                 }
                 field("Delivered DateTime"; Rec."Delivered DateTime")
                 {
                     Importance = Additional;
+                    ToolTip = 'Specifies if the column DeliveredDateTime will be added to the CSV export file.';
                 }
             }
 
@@ -138,26 +155,35 @@ page 82560 "ADLSE Setup"
                 {
                     Importance = Additional;
                     Editable = AzureDataLake;
+                    ToolTip = 'Specifies the format in which to store the exported data in the ''data'' CDM folder. The Parquet format is recommended for storing the data with the best fidelity.';
                 }
-                field("Export Enum as Integer"; Rec."Export Enum as Integer") { }
+                field("Export Enum as Integer"; Rec."Export Enum as Integer")
+                {
+                    ToolTip = 'Specifies if the enums will be exported as integers instead of strings. This is useful if you want to use the enums in Power BI.';
+                }
                 field("Use Field Captions"; Rec."Use Field Captions")
                 {
                     Importance = Additional;
+                    ToolTip = 'Specifies if the captions of fields will be used instead of names. Be aware that the user of the export in all companies must have the same language.';
                 }
                 field("Use Table Captions"; Rec."Use Table Captions")
                 {
                     Importance = Additional;
+                    ToolTip = 'Specifies if the captions of Tables will be used instead of names. Be aware that the user of the export in all companies must have the same language.';
                 }
                 field("Use IDs for Duplicates Only"; Rec."Use IDs for Duplicates Only")
                 {
                     Importance = Additional;
+                    ToolTip = 'Specifies that table and field IDs will only be used in names if duplicates exist.';
                 }
                 field("Export Closing Date column"; Rec."Export Closing Date column")
                 {
                     Importance = Additional;
+                    ToolTip = 'Specifies if you want to export the closing date column in G/L Entries.';
                 }
                 field("Translations"; Rec.Translations)
                 {
+                    ToolTip = 'Specifies the translations for the enums used in the selected tables.';
                     trigger OnAssistEdit()
                     var
                         Language: Record Language;

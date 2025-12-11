@@ -16,7 +16,6 @@ table 82561 "ADLSE Table"
     {
         field(1; "Table ID"; Integer)
         {
-            AllowInCustomizations = AsReadOnly;
             Editable = false;
             Caption = 'Table ID';
         }
@@ -63,7 +62,6 @@ table 82561 "ADLSE Table"
         field(15; ExportFileNumber; Integer)
         {
             Caption = 'Export File Number';
-            AllowInCustomizations = AsReadOnly;
         }
         field(17; "Initial Load Start Date"; Date)
         {
@@ -75,7 +73,7 @@ table 82561 "ADLSE Table"
             DataClassification = CustomerContent;
             ObsoleteState = Pending;
             ObsoleteReason = 'This field will be removed in a future release because readuncommitted will be the default behavior because of performance.';
-            ToolTip = 'Specifies how this table should be processed during export. Standard uses normal processing, Ignore Read Isolation disables read isolation for performance, and Commit Externally uses external commit for large tables.';
+            //ToolTip = 'Specifies how this table should be processed during export. Standard uses normal processing, Ignore Read Isolation disables read isolation for performance, and Commit Externally uses external commit for large tables.';
         }
     }
 

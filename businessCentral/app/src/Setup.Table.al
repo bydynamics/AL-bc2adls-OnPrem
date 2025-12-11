@@ -14,7 +14,6 @@ table 80039 "ADLSE Setup"
     {
         field(1; "Primary Key"; Integer)
         {
-            AllowInCustomizations = AsReadOnly;
             Caption = 'Primary Key';
             Editable = false;
         }
@@ -148,7 +147,6 @@ table 80039 "ADLSE Setup"
         }
         field(35; "Schema Exported On"; DateTime)
         {
-            AllowInCustomizations = AsReadOnly;
             Caption = 'Schema exported on';
         }
         field(40; Translations; Text[2048])
@@ -170,7 +168,6 @@ table 80039 "ADLSE Setup"
         }
         field(55; "Maximum Retries"; Integer)
         {
-            AllowInCustomizations = AsReadOnly;
             Caption = 'Maximum retries';
             InitValue = 0;
 
@@ -203,7 +200,6 @@ table 80039 "ADLSE Setup"
         field(75; "Use Field Captions"; Boolean)
         {
             Caption = 'Use Field Captions';
-            ToolTip = 'Specifies if the captions of fields will be used instead of names. Be aware that the user of the export in all companies must have the same language.';
             InitValue = false;
         }
         field(80; "Use IDs for Duplicates Only"; Boolean)
@@ -214,13 +210,11 @@ table 80039 "ADLSE Setup"
         field(95; "Use Table Captions"; Boolean)
         {
             Caption = 'Use Table Captions';
-            ToolTip = 'Specifies if the captions of Tables will be used instead of names. Be aware that the user of the export in all companies must have the same language.';
             InitValue = false;
         }
         field(100; "Export Closing Date column"; Boolean)
         {
             Caption = 'Export Closing Date column';
-            ToolTip = 'Specifies if you want to export the closing date column in G/L Entries.';
             InitValue = false;
         }
     }
